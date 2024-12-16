@@ -12,12 +12,12 @@
 #define WHITE   'W'
 #define BLACK   'B'
 
-struct ChessPiece {
+typedef struct ChessPiece {
     char piece;
     char color;
     char x;     // Column position (a-h)
     int  y;     // Row position (1-8)
-};
+} ChessPiece;
 
 void initialize_board(char board[ROW_LENGTH][ROW_LENGTH]);
 void print_board(char board[ROW_LENGTH][ROW_LENGTH]);
