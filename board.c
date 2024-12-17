@@ -37,7 +37,7 @@ ChessPiece b_pawn6 = {PAWN, BLACK, 'f', 2};
 ChessPiece b_pawn7 = {PAWN, BLACK, 'g', 2};
 ChessPiece b_pawn8 = {PAWN, BLACK, 'h', 2};
 
-void initialize_board(char board[ROW_LENGTH][ROW_LENGTH]) {
+void initialize_board(ChessPiece board[ROW_LENGTH][ROW_LENGTH]) {
     ChessPiece pieces[] = {
         w_rook1, w_knight1, w_bishop1, w_queen, w_king, w_bishop2, w_knight2, w_rook2,
         w_pawn1, w_pawn2, w_pawn3, w_pawn4, w_pawn5, w_pawn6, w_pawn7, w_pawn8,
@@ -46,20 +46,29 @@ void initialize_board(char board[ROW_LENGTH][ROW_LENGTH]) {
     };
 
     for (int i = 0; i < ROW_LENGTH; i++) {
-        board[0][i] = pieces[i].piece;
-        board[1][i] = pieces[i + ROW_LENGTH].piece;
-        board[6][i] = pieces[i + 2 * ROW_LENGTH].piece;
-        board[7][i] = pieces[i + 3 * ROW_LENGTH].piece;
+        for (int j = 0; j < ROW_LENGTH; j++) {
+            board[i][j].piece = EMPTY;
+            board[i][j].color = EMPTY;
+            board[i][j].x = 'a' + j;
+            board[i][j].y = ROW_LENGTH - i;
+        }
+    }
+
+    for (int i = 0; i < ROW_LENGTH; i++) {
+        board[0][i] = pieces[i];
+        board[1][i] = pieces[i + ROW_LENGTH];
+        board[6][i] = pieces[i + 2 * ROW_LENGTH];
+        board[7][i] = pieces[i + 3 * ROW_LENGTH];
     }
 }
 
-void print_board(char board[ROW_LENGTH][ROW_LENGTH]) {
+void print_board(ChessPiece board[ROW_LENGTH][ROW_LENGTH]) {
     printf("   a b c d e f g h\n");  // Print column letters
 
     for (int i = 0; i < ROW_LENGTH; i++) {
         printf(" %d|", i + 1);  // Print row number
         for (int j = 0; j < ROW_LENGTH; j++) {
-            printf("%c|", board[i][j]);  // Print the board with vertical separators
+            printf("%c|", board[i][j].piece);  // Print the board with vertical separators
         }
         printf("%d\n", i + 1);  // Print row number again on the right
     }

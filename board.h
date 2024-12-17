@@ -8,6 +8,7 @@
 #define ROOK    'R'
 #define KNIGHT  'N'
 #define PAWN    'P'
+#define EMPTY   '_'
 
 #define WHITE   'W'
 #define BLACK   'B'
@@ -19,7 +20,7 @@ typedef struct ChessPiece {
     int  y;     // Row position (1-8)
 } ChessPiece;
 
-void initialize_board(char board[ROW_LENGTH][ROW_LENGTH]);
-void print_board(char board[ROW_LENGTH][ROW_LENGTH]);
+void initialize_board(ChessPiece board[ROW_LENGTH][ROW_LENGTH]);
+void print_board(ChessPiece board[ROW_LENGTH][ROW_LENGTH]);
 
 #endif // BOARD_H

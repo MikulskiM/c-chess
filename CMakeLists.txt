@@ -9,4 +9,4 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
 # Add the executable
-add_executable(c_chess main.c board.c)
+add_executable(c_chess main.c board.c player.c)
