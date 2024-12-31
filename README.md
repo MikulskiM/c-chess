@@ -1,6 +1,8 @@
 # C CHESS
 C chess two player-game
 
+![alt text](image.png)
+
 # HOW TO BUILD
 ## LINUX
 ./build_and_run.sh
