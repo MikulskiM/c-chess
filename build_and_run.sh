@@ -1,15 +1,24 @@
 #!/bin/bash
 
-# Create a build directory if it doesn't exist
-if [ ! -d "build" ]; then
+# Remove old CMake configuration files
+echo "Removing old CMake configuration files..."
+if [ -d "build" ]; then
+  rm -rf build/*
+else
   mkdir build
 fi
 
 # Navigate to the build directory
 cd build
 
-# Run CMake to configure the project
-cmake ..
+# Detect the operating system and run the appropriate CMake command
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+  echo "Configuring for Windows..."
+  cmake -G "MinGW Makefiles" -DCMAKE_MAKE_PROGRAM=/d/MinGW/bin/make ..
+else
+  echo "Configuring for Linux..."
+  cmake ..
+fi
 
 # Build the project
 cmake --build .
@@ -25,3 +34,8 @@ fi
 
 # Return to the root directory
 cd ..
+
+# Pause on Windows systems
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+  read -p "Press any key to exit..."
+fi
