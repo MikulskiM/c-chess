@@ -3,7 +3,7 @@
 #include "player.h"
 
 int main(){
-    ChessPiece board[ROW_LENGTH][ROW_LENGTH];
+    ChessPiece board[ROWS][COLUMNS];
 
     initialize_board(board);
 
@@ -11,6 +11,8 @@ int main(){
 
     Player player_w = {WHITE};
     ask_move(player_w, board);
+
+    print_board(board);
 
     return 0;
 }

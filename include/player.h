@@ -3,10 +3,14 @@
 
 #include "board.h"
 
-typedef struct Player{
-    char color;
+typedef struct {
+    char color; // WHITE or BLACK
 } Player;
 
-void ask_move(Player player, ChessPiece board[ROW_LENGTH][ROW_LENGTH]);
+void ask_move(Player player, ChessPiece board[ROWS][COLUMNS]);
+
+int row_to_index(char row);
+int column_to_index(char column);
+int wrong_index(int row_index, int column_index, ChessPiece board[ROWS][COLUMNS]);
 
 #endif // PLAYER_H
