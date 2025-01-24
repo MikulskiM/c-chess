@@ -14,16 +14,36 @@ int wrong_index(int row_index, int column_index, ChessPiece board[ROWS][COLUMNS]
     return row_index < 0 || row_index >= ROWS || column_index < 0 || column_index >= COLUMNS;
 }
 
-void ask_move(Player player, ChessPiece board[ROWS][COLUMNS]) {
-    int row_index = 0;
-    int column_index = 0;
-    int move_row_index = 0;
-    int move_column_index = 0;
-    char figure_coords[2] = {'0', '0'};
-    char move_coords[2] = {'0', '0'};
+void ask_move(Player player, ChessPiece board[ROWS][COLUMNS], int* want_to_play) {
+    int     row_index           = 0;
+    int     column_index        = 0;
+    int     move_row_index      = 0;
+    int     move_column_index   = 0;
+    char    figure_coords[2]    = {'0', '0'};
+    char    move_coords[2]      = {'0', '0'};
 
     printf("\t[ %c ]\tMake a move - select figure: ", player.color);
     scanf("%2s", figure_coords);
+
+    if(figure_coords[0] == '0' && figure_coords[1] == '0' ||
+        figure_coords[0] == 'e' && figure_coords[1] == 'x'){
+        *want_to_play = FALSE;
+
+        printf("\t[ %c ]:\tI quit! You won...\n", player.color);
+        if(player.color == WHITE){
+            printf(" ___   _        _    __   __  ___   ___     ___   _        _      ___   _  __   __      __  ___   _  _   ___   _ \n");
+            printf("| _ \\ | |      /_\\   \\ \\ / / | __| | _ \\   | _ ) | |      /_\\    / __| | |/ /   \\ \\    / / |_ _| | \\| | / __| | |\n");
+            printf("|  _/ | |__   / _ \\   \\ V /  | _|  |   /   | _ \\ | |__   / _ \\  | (__  | ' <     \\ \\/\\/ /   | |  | .` | \\__ \\ |_|\n");
+            printf("|_|   |____| /_/ \\_\\   |_|   |___| |_|_\\   |___/ |____| /_/ \\_\\  \\___| |_|\\_\\     \\_/\\_/   |___| |_|\\_| |___/ (_)\n");                                                                                              
+        }
+        else{
+            printf(" ___   _        _    __   __  ___   ___    __      __  _  _   ___   _____   ___    __      __  ___   _  _   ___   _ \n");
+            printf("| _ \\ | |      /_\\   \\ \\ / / | __| | _ \\   \\ \\    / / | || | |_ _| |_   _| | __|   \\ \\    / / |_ _| | \\| | / __| | |\n");
+            printf("|  _/ | |__   / _ \\   \\ V /  | _|  |   /    \\ \\/\\/ /  | __ |  | |    | |   | _|     \\ \\/\\/ /   | |  | .` | \\__ \\ |_|\n");
+            printf("|_|   |____| /_/ \\_\\   |_|   |___| |_|_\\     \\_/\\_/   |_||_| |___|   |_|   |___|     \\_/\\_/   |___| |_|\\_| |___/ (_)\n");
+        }
+        return;
+    }
 
     // convert piece coordinates to the array indexes
     if (isdigit(figure_coords[0])) {

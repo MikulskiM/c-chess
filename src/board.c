@@ -76,10 +76,10 @@ void print_board(ChessPiece board[ROWS][COLUMNS]) {
 }
 
 int pawn_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY) {
-    int startY = ROWS - self->y;
-    int startX = self->x - 'a';
-    int endY = ROWS - toY;
-    int endX = toX - 'a';
+    int startY  = ROWS - self->y;
+    int startX  = self->x - 'a';
+    int endY    = ROWS - toY;
+    int endX    = toX - 'a';
     int direction; // Moving direction: white goes up (-1), black goes down (+1)
     
     if(self->color == WHITE){
@@ -112,10 +112,10 @@ int pawn_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], c
 }
 
 void pawn_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY) {
-    int startY = ROWS - self->y;
-    int startX = self->x - 'a';
-    int endY = ROWS - toY;
-    int endX = toX - 'a';
+    int startY  = ROWS - self->y;
+    int startX  = self->x - 'a';
+    int endY    = ROWS - toY;
+    int endX    = toX - 'a';
 
     // Move pawn
     board[endY][endX] = *self;

@@ -1,8 +1,11 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#define ROWS 8
+#define ROWS    8
 #define COLUMNS 8
+
+#define TRUE    1
+#define FALSE   0
 
 #define KING    'K'
 #define QUEEN   'Q'
