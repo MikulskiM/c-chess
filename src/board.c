@@ -3,7 +3,6 @@
 #include "board.h"
 
 /* TODO: DEINE THOSE FIGURES
-ChessPiece w_king    = {KING,    WHITE, 'e', 8};
 ChessPiece w_queen   = {QUEEN,   WHITE, 'd', 8};
 ChessPiece w_rook1   = {ROOK,    WHITE, 'a', 8};
 ChessPiece w_rook2   = {ROOK,    WHITE, 'h', 8};
@@ -12,7 +11,6 @@ ChessPiece w_knight2 = {KNIGHT,  WHITE, 'g', 8};
 ChessPiece w_bishop1 = {ROOK,    WHITE, 'c', 8};
 ChessPiece w_bishop2 = {ROOK,    WHITE, 'f', 8};
 
-ChessPiece b_king    = {KING,    BLACK, 'e', 1};
 ChessPiece b_queen   = {QUEEN,   BLACK, 'd', 1};
 ChessPiece b_rook1   = {ROOK,    BLACK, 'a', 1};
 ChessPiece b_rook2   = {ROOK,    BLACK, 'h', 1};
@@ -46,17 +44,28 @@ void initialize_board(ChessPiece board[ROWS][COLUMNS]) {
     for (int j = 0; j < COLUMNS; j++) {
         board[6][j].piece = PAWN;
         board[6][j].color = WHITE;
-        board[6][j].can_make_this_move = (void *)pawn_can_make_this_move;
-        board[6][j].make_this_move = (void *)pawn_move;
+        board[6][j].can_make_this_move = pawn_can_make_this_move;
+        board[6][j].make_this_move = pawn_move;
     }
 
     // black pawns
     for (int j = 0; j < COLUMNS; j++) {
         board[1][j].piece = PAWN;
         board[1][j].color = BLACK;
-        board[1][j].can_make_this_move = (void *)pawn_can_make_this_move;
-        board[1][j].make_this_move = (void *)pawn_move;
+        board[1][j].can_make_this_move = pawn_can_make_this_move;
+        board[1][j].make_this_move = pawn_move;
     }
+
+    // kings
+    board[0][4].piece = KING;
+    board[0][4].color = BLACK;
+    board[0][4].can_make_this_move = king_can_make_this_move;
+    board[0][4].make_this_move = king_move;
+
+    board[7][4].piece = KING;
+    board[7][4].color = WHITE;
+    board[7][4].can_make_this_move = king_can_make_this_move;
+    board[7][4].make_this_move = king_move;
 }
 
 void print_board(ChessPiece board[ROWS][COLUMNS]) {
@@ -73,6 +82,25 @@ void print_board(ChessPiece board[ROWS][COLUMNS]) {
 
     printf("   a b c d e f g h\n");  // Print column letters again
     printf("\tWHITE\n");
+}
+
+int king_is_alive(ChessPiece board[ROWS][COLUMNS]) {
+    int king_counter = 0;
+
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++) {
+            if (board[i][j].piece == KING) {
+                king_counter++;
+            }
+        }
+    }
+
+    if (king_counter == 2) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }
 
 int pawn_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY) {
@@ -125,6 +153,47 @@ void pawn_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int 
     board[startY][startX].make_this_move = NULL;
 
     // update pawn position
+    board[endY][endX].x = toX;
+    board[endY][endX].y = toY;
+}
+
+int king_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY) {
+    int startY  = ROWS - self->y;
+    int startX  = self->x - 'a';
+    int endY    = ROWS - toY;
+    int endX    = toX - 'a';
+
+    // Move one step in whatever direction
+    if (endX - startX >= -1 && endX - startX <= 1 &&
+        endY - startY >= -1 && endY - startY <= 1 &&
+        board[endY][endX].piece == EMPTY) {
+        return 1;
+    }
+
+    // Hit
+    if (endX - startX >= -1 && endX - startX <= 1 &&
+        endY - startY >= -1 && endY - startY <= 1 && 
+        board[endY][endX].piece != EMPTY && board[endY][endX].color != self->color) {
+        return 1;
+    }
+
+    return 0; // Can't do that move
+}
+
+void king_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY) {
+    int startY  = ROWS - self->y;
+    int startX  = self->x - 'a';
+    int endY    = ROWS - toY;
+    int endX    = toX - 'a';
+
+    // Move king
+    board[endY][endX] = *self;
+    board[startY][startX].piece = EMPTY;
+    board[startY][startX].color = EMPTY;
+    board[startY][startX].can_make_this_move = NULL;
+    board[startY][startX].make_this_move = NULL;
+
+    // update king position
     board[endY][endX].x = toX;
     board[endY][endX].y = toY;
 }

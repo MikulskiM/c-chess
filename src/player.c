@@ -120,4 +120,21 @@ void ask_move(Player player, ChessPiece board[ROWS][COLUMNS], int* want_to_play)
     } else {
         printf("Error: No valid move check function assigned.\n");
     }
+
+    if (player.color == WHITE && king_is_alive(board) == FALSE) {
+        printf("\t[ %c ]\tKilled opponent's king\n", player.color);
+        printf(" ___   _        _    __   __  ___   ___    __      __  _  _   ___   _____   ___    __      __  ___   _  _   ___   _ \n");
+        printf("| _ \\ | |      /_\\   \\ \\ / / | __| | _ \\   \\ \\    / / | || | |_ _| |_   _| | __|   \\ \\    / / |_ _| | \\| | / __| | |\n");
+        printf("|  _/ | |__   / _ \\   \\ V /  | _|  |   /    \\ \\/\\/ /  | __ |  | |    | |   | _|     \\ \\/\\/ /   | |  | .` | \\__ \\ |_|\n");
+        printf("|_|   |____| /_/ \\_\\   |_|   |___| |_|_\\     \\_/\\_/   |_||_| |___|   |_|   |___|     \\_/\\_/   |___| |_|\\_| |___/ (_)\n");
+        *want_to_play = FALSE;
+    }
+    else if (player.color == BLACK && king_is_alive(board) == FALSE){
+        printf("\t[ %c ]\tKilled opponent's king\n", player.color);
+        printf(" ___   _        _    __   __  ___   ___     ___   _        _      ___   _  __   __      __  ___   _  _   ___   _ \n");
+        printf("| _ \\ | |      /_\\   \\ \\ / / | __| | _ \\   | _ ) | |      /_\\    / __| | |/ /   \\ \\    / / |_ _| | \\| | / __| | |\n");
+        printf("|  _/ | |__   / _ \\   \\ V /  | _|  |   /   | _ \\ | |__   / _ \\  | (__  | ' <     \\ \\/\\/ /   | |  | .` | \\__ \\ |_|\n");
+        printf("|_|   |____| /_/ \\_\\   |_|   |___| |_|_\\   |___/ |____| /_/ \\_\\  \\___| |_|\\_\\     \\_/\\_/   |___| |_|\\_| |___/ (_)\n");                                                                                              
+        *want_to_play = FALSE;
+    }
 }

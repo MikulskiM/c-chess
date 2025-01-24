@@ -32,7 +32,11 @@ void initialize_board(ChessPiece board[ROWS][COLUMNS]);
 void print_board(ChessPiece board[ROWS][COLUMNS]);
 void print_chess_piece(ChessPiece chess_piece);
 
+int king_is_alive(ChessPiece board[ROWS][COLUMNS]);
+
 int pawn_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
 void pawn_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+int king_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+void king_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
 
 #endif // BOARD_H
