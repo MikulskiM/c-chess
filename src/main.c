@@ -4,24 +4,24 @@
 
 int main(){
     ChessPiece  board[ROWS][COLUMNS];
-    int         want_to_play    = TRUE;
+    int         game_is_active  = TRUE;
     Player      player_w        = {WHITE};
     Player      player_b        = {BLACK};
-    int         black_move      = FALSE;
+    int         is_black_turn   = FALSE;
 
     initialize_board(board);
 
-    while(want_to_play) {
+    while(game_is_active) {
 
         print_board(board);
 
-        if(black_move){
-            ask_move(player_b, board, &want_to_play);
-            black_move = FALSE;
+        if(is_black_turn){
+            ask_move(player_b, board, &game_is_active);
+            is_black_turn = FALSE;
         }
         else{
-            ask_move(player_w, board, &want_to_play);
-            black_move = TRUE;
+            ask_move(player_w, board, &game_is_active);
+            is_black_turn = TRUE;
         }
     }
 

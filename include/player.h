@@ -7,7 +7,7 @@ typedef struct {
     char color; // WHITE or BLACK
 } Player;
 
-void ask_move(Player player, ChessPiece board[ROWS][COLUMNS], int* want_to_play);
+void ask_move(Player player, ChessPiece board[ROWS][COLUMNS], int* game_is_active);
 
 int row_to_index(char row);
 int column_to_index(char column);

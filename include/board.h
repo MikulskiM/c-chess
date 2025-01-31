@@ -7,6 +7,8 @@
 #define TRUE    1
 #define FALSE   0
 
+#define BOTH_KINGS  2
+
 #define KING    'K'
 #define QUEEN   'Q'
 #define ROOK    'R'

@@ -10,111 +10,66 @@ void print_chess_piece(ChessPiece chess_piece) {
     printf("\ty:\t\t%d\n", chess_piece.y);
 }
 
+void place_piece(ChessPiece board[ROWS][COLUMNS], char piece, char color, int row, int col, void *can_move_function, void *move_function) {
+    board[row][col].piece = piece;
+    board[row][col].color = color;
+    board[row][col].can_make_this_move = can_move_function;
+    board[row][col].make_this_move = move_function;
+}
+
+int is_empty(ChessPiece *piece) {
+    if(piece->piece == EMPTY){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
+int is_opponent_piece(ChessPiece *self, ChessPiece *target) {
+    if(is_empty == FALSE && self->color != target->color){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 void initialize_bishops(ChessPiece board[ROWS][COLUMNS]) {
-    board[0][2].piece = BISHOP;
-    board[0][2].color = BLACK;
-    board[0][2].can_make_this_move = bishop_can_make_this_move;
-    board[0][2].make_this_move = piece_move;
-
-    board[0][5].piece = BISHOP;
-    board[0][5].color = BLACK;
-    board[0][5].can_make_this_move = bishop_can_make_this_move;
-    board[0][5].make_this_move = piece_move;
-
-    board[7][2].piece = BISHOP;
-    board[7][2].color = WHITE;
-    board[7][2].can_make_this_move = bishop_can_make_this_move;
-    board[7][2].make_this_move = piece_move;
-
-    board[7][5].piece = BISHOP;
-    board[7][5].color = WHITE;
-    board[7][5].can_make_this_move = bishop_can_make_this_move;
-    board[7][5].make_this_move = piece_move;
+    place_piece(board, BISHOP, BLACK, 0, 2, bishop_can_make_this_move, piece_move);
+    place_piece(board, BISHOP, BLACK, 0, 5, bishop_can_make_this_move, piece_move);
+    place_piece(board, BISHOP, WHITE, 7, 2, bishop_can_make_this_move, piece_move);
+    place_piece(board, BISHOP, WHITE, 7, 5, bishop_can_make_this_move, piece_move);
 }
 
 void initialize_knights(ChessPiece board[ROWS][COLUMNS]) {
-    board[0][1].piece = KNIGHT;
-    board[0][1].color = BLACK;
-    board[0][1].can_make_this_move = knight_can_make_this_move;
-    board[0][1].make_this_move = piece_move;
-
-    board[0][6].piece = KNIGHT;
-    board[0][6].color = BLACK;
-    board[0][6].can_make_this_move = knight_can_make_this_move;
-    board[0][6].make_this_move = piece_move;
-
-    board[7][1].piece = KNIGHT;
-    board[7][1].color = WHITE;
-    board[7][1].can_make_this_move = knight_can_make_this_move;
-    board[7][1].make_this_move = piece_move;
-
-    board[7][6].piece = KNIGHT;
-    board[7][6].color = WHITE;
-    board[7][6].can_make_this_move = knight_can_make_this_move;
-    board[7][6].make_this_move = piece_move;
+    place_piece(board, KNIGHT, BLACK, 0, 1, knight_can_make_this_move, piece_move);
+    place_piece(board, KNIGHT, BLACK, 0, 6, knight_can_make_this_move, piece_move);
+    place_piece(board, KNIGHT, WHITE, 7, 1, knight_can_make_this_move, piece_move);
+    place_piece(board, KNIGHT, WHITE, 7, 6, knight_can_make_this_move, piece_move);
 }
 
 void initialize_rooks(ChessPiece board[ROWS][COLUMNS]) {
-    board[0][0].piece = ROOK;
-    board[0][0].color = BLACK;
-    board[0][0].can_make_this_move = rook_can_make_this_move;
-    board[0][0].make_this_move = piece_move;
-
-    board[0][7].piece = ROOK;
-    board[0][7].color = BLACK;
-    board[0][7].can_make_this_move = rook_can_make_this_move;
-    board[0][7].make_this_move = piece_move;
-
-    board[7][0].piece = ROOK;
-    board[7][0].color = WHITE;
-    board[7][0].can_make_this_move = rook_can_make_this_move;
-    board[7][0].make_this_move = piece_move;
-
-    board[7][7].piece = ROOK;
-    board[7][7].color = WHITE;
-    board[7][7].can_make_this_move = rook_can_make_this_move;
-    board[7][7].make_this_move = piece_move;
+    place_piece(board, ROOK, BLACK, 0, 0, rook_can_make_this_move, piece_move);
+    place_piece(board, ROOK, BLACK, 0, 7, rook_can_make_this_move, piece_move);
+    place_piece(board, ROOK, WHITE, 7, 0, rook_can_make_this_move, piece_move);
+    place_piece(board, ROOK, WHITE, 7, 7, rook_can_make_this_move, piece_move);
 }
 
 void initialize_queens(ChessPiece board[ROWS][COLUMNS]) {
-    board[0][3].piece = QUEEN;
-    board[0][3].color = BLACK;
-    board[0][3].can_make_this_move = queen_can_make_this_move;
-    board[0][3].make_this_move = piece_move;
-
-    board[7][3].piece = QUEEN;
-    board[7][3].color = WHITE;
-    board[7][3].can_make_this_move = queen_can_make_this_move;
-    board[7][3].make_this_move = piece_move;
+    place_piece(board, QUEEN, BLACK, 0, 3, queen_can_make_this_move, piece_move);
+    place_piece(board, QUEEN, WHITE, 7, 3, queen_can_make_this_move, piece_move);
 }
 
 void initialize_kings(ChessPiece board[ROWS][COLUMNS]) {
-    board[0][4].piece = KING;
-    board[0][4].color = BLACK;
-    board[0][4].can_make_this_move = king_can_make_this_move;
-    board[0][4].make_this_move = piece_move;
-
-    board[7][4].piece = KING;
-    board[7][4].color = WHITE;
-    board[7][4].can_make_this_move = king_can_make_this_move;
-    board[7][4].make_this_move = piece_move;
+    place_piece(board, KING, BLACK, 0, 4, king_can_make_this_move, piece_move);
+    place_piece(board, KING, WHITE, 7, 4, king_can_make_this_move, piece_move);
 }
 
 void initialize_pawns(ChessPiece board[ROWS][COLUMNS]) {
-    // white pawns
     for (int j = 0; j < COLUMNS; j++) {
-        board[6][j].piece = PAWN;
-        board[6][j].color = WHITE;
-        board[6][j].can_make_this_move = pawn_can_make_this_move;
-        board[6][j].make_this_move = piece_move;
-    }
-
-    // black pawns
-    for (int j = 0; j < COLUMNS; j++) {
-        board[1][j].piece = PAWN;
-        board[1][j].color = BLACK;
-        board[1][j].can_make_this_move = pawn_can_make_this_move;
-        board[1][j].make_this_move = piece_move;
+        place_piece(board, PAWN, WHITE, 6, j, pawn_can_make_this_move, piece_move);
+        place_piece(board, PAWN, BLACK, 1, j, pawn_can_make_this_move, piece_move);
     }
 }
 
@@ -165,7 +120,7 @@ int king_is_alive(ChessPiece board[ROWS][COLUMNS]) {
         }
     }
 
-    if (king_counter == 2) {
+    if (king_counter == BOTH_KINGS) {
         return TRUE;
     }
     else {
