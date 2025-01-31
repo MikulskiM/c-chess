@@ -11,6 +11,7 @@
 #define QUEEN   'Q'
 #define ROOK    'R'
 #define KNIGHT  'N'
+#define BISHOP  'B'
 #define PAWN    'P'
 #define EMPTY   '_'
 
@@ -34,9 +35,12 @@ void print_chess_piece(ChessPiece chess_piece);
 
 int king_is_alive(ChessPiece board[ROWS][COLUMNS]);
 
+void piece_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
 int pawn_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
-void pawn_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
 int king_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
-void king_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+int queen_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+int rook_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+int knight_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
+int bishop_can_make_this_move(ChessPiece *self, ChessPiece board[ROWS][COLUMNS], char toX, int toY);
 
 #endif // BOARD_H
