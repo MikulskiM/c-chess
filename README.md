@@ -1,7 +1,7 @@
 # C CHESS
 C chess two player-game
 
-![alt text](image.png)
+![alt text](image-1.png)
 
 # HOW TO BUILD
 ## LINUX
@@ -14,3 +14,5 @@ will do the thing.
 
 should do the thing as well.
 Notice that for Windows CMAKE_C_COMPILER and CMAKE_CXX_COMPILER paths are specified in the CMakeLists.txt. Same thing for DCMAKE_MAKE_PROGRAM in build_and_run.sh
+
+![alt text](image-2.png)
